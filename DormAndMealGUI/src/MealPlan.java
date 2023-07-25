@@ -26,11 +26,11 @@
  */
 public class MealPlan {
 	// array of meal plan options
-	private String[] mealPlans = {"7 meals per week", "14 meals per week",
+	private String[] mealPlans = {"None","7 meals per week", "14 meals per week",
 			"Unlimited meals"};
 	
 	// array of meal plan options' costs
-	private double[] mealPlanCosts = {560.0, 1095.0, 5150.0};
+	private double[] mealPlanCosts = {0.0, 560.0, 1095.0, 5150.0};
 	
 	// user meal plan selection string
 	private String mealPlanSelection;
@@ -55,6 +55,15 @@ public class MealPlan {
 	public MealPlan(int userSelection) {
 		mealPlanSelection = mealPlans[userSelection];
 		mealCostSelection = mealPlanCosts[userSelection];
+	}
+	
+	
+	/**
+	 * Return list of meal plans for Spinner model.
+	 * @return mealPlans String array of meal plan options
+	 */
+	public String[] getMealPlanList() {
+		return mealPlans;
 	}
 	
 	/**

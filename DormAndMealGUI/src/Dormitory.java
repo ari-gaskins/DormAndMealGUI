@@ -58,7 +58,25 @@ public class Dormitory {
 	}
 	
 	/**
-	 * Returns dormitory name.
+	 * Sets the dormitory name and room cost based on returned index from
+	 * selection.
+	 * @paramuserSelection index returned by selection
+	 */
+	public void setDormAndMeal(int userSelection) {
+		dormSelection = dormNames[userSelection];
+		roomCostSelection = roomCosts[userSelection];
+	}
+	
+	/**
+	 * Returns list of dormitories Spinner model.
+	 * @return dormNames String array of dormitory names
+	 */
+	public String[] getDormNameList() {
+		return dormNames;
+	}
+	
+	/**
+	 * Returns dormitory name selected.
 	 * @return dormSelection String name of dormitory
 	 */
 	public String getDormName() {
