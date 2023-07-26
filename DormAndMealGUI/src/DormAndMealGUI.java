@@ -32,7 +32,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
-public class DormAndMealGUI extends JFrame implements ChangeListener{
+public class DormAndMealGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	// allows user to choose dormitory
@@ -62,6 +62,12 @@ public class DormAndMealGUI extends JFrame implements ChangeListener{
 	// Meal Plan object to get meal plan information
 	private MealPlan mealPlanObj;
 	
+	// declare change listener for the dormSpinner component
+	ChangeListener dormOptionChange;
+	
+	// declare change listener for the mealSpinner component
+	ChangeListener mealPlanChange;
+	
 	/**
 	 * Constructor that creates GUI components and adds them
 	 * using a GridBagLayout. 
@@ -89,14 +95,15 @@ public class DormAndMealGUI extends JFrame implements ChangeListener{
 		dormObj = new Dormitory();
 		dormListModel = new SpinnerListModel(dormObj.getDormNameList());
 		dormSpinner = new JSpinner(dormListModel);
-		dormSpinner.addChangeListener(this);
+		
+		//dormSpinner.addChangeListener(this);
 		
 		// initialize meal plan object, spinner model, spinner, and set
 		// change listener
 		mealPlanObj = new MealPlan();
 		mealListModel = new SpinnerListModel(mealPlanObj.getMealPlanList());
 		mealSpinner = new JSpinner(mealListModel);
-		mealSpinner.addChangeListener(this);
+		//mealSpinner.addChangeListener(this);
 		
 		// initialize total cost text field
 		totalCostField = new JTextField(20);
@@ -106,60 +113,69 @@ public class DormAndMealGUI extends JFrame implements ChangeListener{
 		// Use a GridBagLayout
 		setLayout(new GridBagLayout());
 		
-		
-		
 		// specify component's grid locations
 		// dormitory label upper upper left grid
 		layoutConstraints = new GridBagConstraints();
+		layoutConstraints.fill = GridBagConstraints.HORIZONTAL;
 		layoutConstraints.insets = new Insets(10, 10, 10, 5);
 		layoutConstraints.anchor = GridBagConstraints.FIRST_LINE_START;
+		layoutConstraints.weightx = 0.5;
 		layoutConstraints.gridx = 0;
 		layoutConstraints.gridy = 0;
 		add(dormLabel, layoutConstraints);
 		
 		// meal plan label middle upper left grid
 		layoutConstraints = new GridBagConstraints();
+		layoutConstraints.fill = GridBagConstraints.HORIZONTAL;
 		layoutConstraints.insets = new Insets(20, 10, 10, 5);
 		layoutConstraints.anchor = GridBagConstraints.LINE_START;
+		layoutConstraints.weightx = 0.5;
 		layoutConstraints.gridx = 0;
-		layoutConstraints.gridy = 0;
+		layoutConstraints.gridy = 1;
 		add(mealLabel, layoutConstraints);
 		
 		// dormitory spinner upper upper right grid
 		layoutConstraints = new GridBagConstraints();
+		layoutConstraints.fill = GridBagConstraints.HORIZONTAL;
 		layoutConstraints.insets = new Insets(10, 5, 10, 20);
 		layoutConstraints.anchor = GridBagConstraints.PAGE_START;
+		layoutConstraints.weightx = 0.5;
 		layoutConstraints.gridx = 1;
 		layoutConstraints.gridy = 0;
 		add(dormSpinner, layoutConstraints);
 		
 		// meal plan spinner middle upper right grid
 		layoutConstraints = new GridBagConstraints();
+		layoutConstraints.fill = GridBagConstraints.HORIZONTAL;
 		layoutConstraints.insets = new Insets(20, 5, 10, 20);
 		layoutConstraints.anchor = GridBagConstraints.CENTER;
+		layoutConstraints.weightx = 0.5;
 		layoutConstraints.gridx = 1;
-		layoutConstraints.gridy = 0;
+		layoutConstraints.gridy = 1;
 		add(mealSpinner, layoutConstraints);
 		
 		// total cost label bottom left grid
 		layoutConstraints = new GridBagConstraints();
+		layoutConstraints.fill = GridBagConstraints.HORIZONTAL;
 		layoutConstraints.insets = new Insets(20, 10, 20, 5);
 		layoutConstraints.anchor = GridBagConstraints.LAST_LINE_START;
+		layoutConstraints.weightx = 0.5;
 		layoutConstraints.gridx = 0;
-		layoutConstraints.gridy = 1;
+		layoutConstraints.gridy = 2;
 		add(totalCostLabel, layoutConstraints);
 		
 		// total cost text field bottom right grid
 		layoutConstraints = new GridBagConstraints();
+		layoutConstraints.fill = GridBagConstraints.HORIZONTAL;
 		layoutConstraints.insets = new Insets(20, 5, 20, 10);
 		layoutConstraints.anchor = GridBagConstraints.PAGE_END;
+		layoutConstraints.weightx = 0.5;
 		layoutConstraints.gridx = 1;
-		layoutConstraints.gridy = 1;
+		layoutConstraints.gridy = 2;
 		add(totalCostField, layoutConstraints);
 	
 		// add change listener to dormitory spinner to track and get user selection
-		dormSpinner.addChangeListener(new ChangeListener() {
-			@Override
+		dormOptionChange = new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				if (dormSpinner == event.getSource()) {
 					String dormNameSelection;
@@ -177,11 +193,12 @@ public class DormAndMealGUI extends JFrame implements ChangeListener{
 					}
 				}
 			}
-		});
-	
+		};
+		
+		dormSpinner.addChangeListener(dormOptionChange);
+		
 		// add change listener to meal plan spinner to track and get user selection
-		mealSpinner.addChangeListener(new ChangeListener() {
-			@Override
+		mealPlanChange = new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				if (mealSpinner == event.getSource()) {
 					String mealPlanSelection;
@@ -199,16 +216,19 @@ public class DormAndMealGUI extends JFrame implements ChangeListener{
 					}
 				}
 			}
-		});
+		};
+		
+		mealSpinner.addChangeListener(mealPlanChange);
 	}
 			
-	public double getTotalCost() {
+	public void getTotalCost() {
 		double dormCost = dormObj.getRoomCost();
 		double mealPlanCost = mealPlanObj.getMealPlanCost();
 		
+		
 		totalCost = dormCost + mealPlanCost;
 		
-		return totalCost;
+		totalCostField.setText(String.valueOf(totalCost));
 	}
     
 	
@@ -221,12 +241,5 @@ public class DormAndMealGUI extends JFrame implements ChangeListener{
 		dormMealFrame.pack();
 		dormMealFrame.setVisible(true);
 	}
-
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

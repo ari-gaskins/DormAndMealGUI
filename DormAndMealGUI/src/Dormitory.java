@@ -26,11 +26,11 @@
  */
 public class Dormitory {
 	// array of the dormitory names 
-	private String[] dormNames = {"Allen Hall", "Pike Hall", "Farthing Hall", 
+	private String[] dormNames = {"None","Allen Hall", "Pike Hall", "Farthing Hall", 
 			"University Suites"};
 	
 	// array of the dormitory costs (aligned with dormNames)
-	private double[] roomCosts = {1500.0, 1600.0, 1200.0, 1800.0};
+	private double[] roomCosts = {0.0, 1500.0, 1600.0, 1200.0, 1800.0};
 	
 	// user dormitory selection name
 	private String dormSelection;
