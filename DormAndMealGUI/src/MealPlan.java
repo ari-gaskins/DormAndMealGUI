@@ -50,13 +50,22 @@ public class MealPlan {
 	/**
 	 * Constructor initializing meal plan selection and cost based on index
 	 * selected by user
-	 * @paramuserSelection index returned by selection
+	 * @paramuserSelection index returned by user's selection
 	 */
 	public MealPlan(int userSelection) {
 		mealPlanSelection = mealPlans[userSelection];
 		mealCostSelection = mealPlanCosts[userSelection];
 	}
 	
+	/**
+	 * Sets the meal plan and cost based on the index returned by the
+	 * selection.
+	 * @paramuserSelection index returned by user's selection
+	 */
+	public void setMealAndCost(int userSelection) {
+		mealPlanSelection = mealPlans[userSelection];
+		mealCostSelection = mealPlanCosts[userSelection];
+	}
 	
 	/**
 	 * Return list of meal plans for Spinner model.

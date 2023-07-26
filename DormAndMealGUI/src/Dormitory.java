@@ -50,7 +50,7 @@ public class Dormitory {
 	/**
 	 * Constructor setting the dormitory name and room cost based on returned
 	 * index from selection.
-	 * @paramuserSelection index returned by selection
+	 * @paramuserSelection index returned by user's selection
 	 */
 	public Dormitory(int userSelection) {
 		dormSelection = dormNames[userSelection];
@@ -60,9 +60,9 @@ public class Dormitory {
 	/**
 	 * Sets the dormitory name and room cost based on returned index from
 	 * selection.
-	 * @paramuserSelection index returned by selection
+	 * @paramuserSelection index returned by user's selection
 	 */
-	public void setDormAndMeal(int userSelection) {
+	public void setDormAndRoom(int userSelection) {
 		dormSelection = dormNames[userSelection];
 		roomCostSelection = roomCosts[userSelection];
 	}
