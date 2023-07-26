@@ -87,7 +87,7 @@ public class DormAndMealGUI extends JFrame{
 		SpinnerListModel mealListModel = null;
 		
 		// set frame title
-		setTitle("Cost of Dormitory and Meal Plan per Semester");
+		setTitle("Cost of Dormitory and Meal Plan");
 		
 		// initialize labels
 		dormLabel = new JLabel("Dormitory Options:");
