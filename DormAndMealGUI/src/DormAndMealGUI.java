@@ -30,6 +30,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.lang.Runnable;
 
 
 public class DormAndMealGUI extends JFrame{
@@ -40,6 +41,9 @@ public class DormAndMealGUI extends JFrame{
 	
 	// allows user to choose meal plan
 	private JSpinner mealSpinner;
+	
+	// submit button to trigger showing total cost
+	JButton submitButton = new JButton("Submit");
 	
 	// label for dormitory spinner
 	private JLabel dormLabel;
@@ -173,8 +177,19 @@ public class DormAndMealGUI extends JFrame{
 		layoutConstraints.gridx = 1;
 		layoutConstraints.gridy = 2;
 		add(totalCostField, layoutConstraints);
+		
+		// submit button bottom center grid
+		layoutConstraints = new GridBagConstraints();
+		layoutConstraints.fill = GridBagConstraints.HORIZONTAL;
+		layoutConstraints.insets = new Insets(10, 5, 5, 5);
+		layoutConstraints.anchor = GridBagConstraints.PAGE_END;
+		layoutConstraints.weightx = 0.5;
+		layoutConstraints.gridx = 0;
+		layoutConstraints.gridy = 3;
+		add(submitButton, layoutConstraints);
 	
-		// add change listener to dormitory spinner to track and get user selection
+		// add change listener to dormitory spinner to track and 
+		// get user selection
 		dormOptionChange = new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				if (dormSpinner == event.getSource()) {
@@ -197,7 +212,8 @@ public class DormAndMealGUI extends JFrame{
 		
 		dormSpinner.addChangeListener(dormOptionChange);
 		
-		// add change listener to meal plan spinner to track and get user selection
+		// add change listener to meal plan spinner to track and
+		// get user selection
 		mealPlanChange = new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
 				if (mealSpinner == event.getSource()) {
@@ -219,15 +235,23 @@ public class DormAndMealGUI extends JFrame{
 		};
 		
 		mealSpinner.addChangeListener(mealPlanChange);
+		
+		submitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				getTotalCost();
+			}
+		});
 	}
 			
 	public void getTotalCost() {
 		double dormCost = dormObj.getRoomCost();
 		double mealPlanCost = mealPlanObj.getMealPlanCost();
 		
-		
+		// calculate total cost 
 		totalCost = dormCost + mealPlanCost;
 		
+		// show total cost in text field
 		totalCostField.setText(String.valueOf(totalCost));
 	}
     
@@ -236,7 +260,7 @@ public class DormAndMealGUI extends JFrame{
 		// declares and initializes DormAndMealGUI  and its component
 		DormAndMealGUI dormMealFrame = new DormAndMealGUI();
 		
-		dormMealFrame.setSize(2000, 4000);
+		dormMealFrame.setSize(4000, 4000);
 		dormMealFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dormMealFrame.pack();
 		dormMealFrame.setVisible(true);
