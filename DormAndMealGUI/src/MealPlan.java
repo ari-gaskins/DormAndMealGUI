@@ -22,7 +22,7 @@
  * associated with a corresponding cost per semester. User selects their
  * option in main.
  * @author Ari Gaskins
- * @version 1.0
+ * @version 1.3
  */
 public class MealPlan {
 	// array of meal plan options

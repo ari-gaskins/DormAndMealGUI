@@ -22,7 +22,7 @@
  * Each dormitory name is associated with a corresponding cost per semester. 
  * User selects their option in main.
  * @author Ari Gaskins
- * @version 1.0
+ * @version 1.4
  */
 public class Dormitory {
 	// array of the dormitory names 

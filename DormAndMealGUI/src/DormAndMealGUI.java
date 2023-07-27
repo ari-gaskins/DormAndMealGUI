@@ -3,7 +3,8 @@
 'Programmer: Ari Gaskins
 'Company Info:  arigaskins.work@gmail.com 
 'Date: 24 07 2023
-'Description:  Problem Number 01.  
+'Description:  Problem Number 01. 
+'GitHub: https://github.com/ari-gaskins/DormAndMealGUI 
 '    
 '   Application which gives user option to choose their dormitory hall and 
 '   their meal plan. Input taken through event listeners. Output shows the
@@ -21,7 +22,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
@@ -30,9 +30,15 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.lang.Runnable;
 
 
+/**
+ * A class that creates a small graphical user interface that allows user
+ * to select their dormitory location and their meal plan and calculate 
+ * the total cost.
+ * @author Ari Gaskins
+ * @version 1.6
+ */
 public class DormAndMealGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 
@@ -236,6 +242,7 @@ public class DormAndMealGUI extends JFrame{
 		
 		mealSpinner.addChangeListener(mealPlanChange);
 		
+		// add action listener to submit button to show total cost
 		submitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -243,15 +250,16 @@ public class DormAndMealGUI extends JFrame{
 			}
 		});
 	}
-			
+	
+	/**
+	 * Calculate total cost; show total cost in text field.
+	 */
 	public void getTotalCost() {
 		double dormCost = dormObj.getRoomCost();
 		double mealPlanCost = mealPlanObj.getMealPlanCost();
-		
-		// calculate total cost 
+		 
 		totalCost = dormCost + mealPlanCost;
 		
-		// show total cost in text field
 		totalCostField.setText(String.valueOf(totalCost));
 	}
     
